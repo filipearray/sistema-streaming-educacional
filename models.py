@@ -1,2 +1,2 @@
-class Usuario(Bd.model):
-  id = Bd.column(Bd.int, primary_key=true)
+class Usuario(bd.model):
+  id = bd.column(bd.int, primary_key=True)
