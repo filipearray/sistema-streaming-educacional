@@ -5,4 +5,5 @@ smartclass/
 ├── templates/
 │   ├── login.html
 │   └── register.html
-└── database.db  (gerado automaticamente)
+└── database.db
+
