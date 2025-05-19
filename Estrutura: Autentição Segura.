@@ -1,0 +1,9 @@
+# Autentição Segura.
+smartclass/
+├── app.py
+├── models.py
+├── requirements.txt
+├── templates/
+│   ├── login.html
+│   └── register.html
+└── database.db  (gerado automaticamente)
