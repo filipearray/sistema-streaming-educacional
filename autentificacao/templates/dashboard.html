@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Painel</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #e3f2fd;
+      border-radius: 8px;
+      text-align: center;
+    }
+    h1 {
+      color: #1565c0;
+    }
+    a {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 10px 20px;
+      background-color: #0288d1;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+    a:hover {
+      background-color: #0277bd;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Bem-vindo ao painel, {{ nome }}!</h1>
+  <p>Você está logado com sucesso.</p>
+
+  <a href="{{ url_for('logout') }}">Sair</a>
+
+</body>
+</html>
