@@ -1,11 +1,17 @@
 from flask import Flask, flash, redirect, render_template, request, url_for, session
 from flask_bcrypt import Bcrypt
 import sqlite3
+import re
 
 app = Flask(__name__)
 app.secret_key = 'sua_chave_secreta_aqui'
 
 bcrypt = Bcrypt(app)
+
+def validar_email(email):
+    """Função para validar o formato do e-mail"""
+    padrao = r'^[\w\.-]+@[\w\.-]+\.[a-zA-Z]{2,}$'
+    return re.match(padrao, email) is not None
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -16,6 +22,14 @@ def register():
         confirma_senha = request.form['confirma_senha']
         perfil = request.form['perfil']
 
+        if not validar_email(email):
+            flash("Formato de e-mail inválido. Use o formato: nome@exemplo.com", "error")
+            return render_template("register.html")
+
+        if len(senha) < 8:
+            flash("A senha deve ter pelo menos 8 caracteres.", "error")
+            return render_template("register.html")
+        
         if senha != confirma_senha:
             flash("As senhas não coincidem.", "error")
             return render_template("register.html")
