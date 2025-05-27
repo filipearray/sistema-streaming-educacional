@@ -1,9 +1,18 @@
-smartclass/
-├── app.py
-├── models.py
-├── requirements.txt
-├── templates/
-│   ├── login.html
-│   └── register.html
-└── database.db
-
+  sistema-streaming/
+├─── backend/               # Tudo do backend
+│    ├── app.py             # Ponto de entrada principal
+│    ├── models.py          # Definição dos modelos
+│    ├── database.db        # Banco de dados SQLite
+│    ├── requirements.txt   # Dependências
+│    └── __pycache__/       # Cache Python (gerado automaticamente)
+│
+├─── frontend/              # Interface do usuário
+│    └── templates/         # Páginas HTML
+│
+├── build/                  # Arquivos de build (gerados)
+│   └── main               # Executável temporário
+│
+├── dist/                   # Output final (gerado)
+│
+├── iniciar_app.bat         # Script de inicialização
+└── main.spec               # Configuração do PyInstaller
