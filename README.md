@@ -1,40 +1,55 @@
-# Streaming Educacional 
-# Uma plataforma digital voltada ao fornecimento de conteúdos educativos em formato audiovisual, com foco especial no público infantojuvenil. 
-🔐 Autenticação e Segurança
-O projeto implementa mecanismos de autenticação e segurança para garantir que apenas usuários autorizados acessem determinadas funcionalidades.
+#  Sistema de Streaming Educacional  
 
-🔑 Mecanismos Utilizados
-Autenticação: Verificação de usuário e senha através de formulários.
+**Sistema Web educacional** com arquitetura separada de Frontend e Backend (API), com foco em segurança da informação, autenticação de usuários e acesso a conteúdos educacionais.  
 
-Hash de Senhas: Utilização de algoritmos de hash (como bcrypt) para proteger as senhas armazenadas no banco de dados.
+---
 
-Sessões Seguras: Gerenciamento de sessões com expiração para proteger o acesso contínuo.
+##  Arquitetura do Projeto  
+O sistema é dividido em duas camadas independentes:  
 
-Validação de Login: Campos obrigatórios, tratamento de erros e verificação de credenciais.
+| **Camada**       | **Descrição**                                                                 |
+|------------------|------------------------------------------------------------------------------|
+| **Frontend**     | Interface com o usuário (páginas HTML, formulários, layout, exibição).       |
+| **Backend (API)**| Lógica de negócio, autenticação, segurança e conexão com o banco de dados.   |
 
-Criptografia: Proteção de dados sensíveis utilizando bibliotecas de criptografia.
+A comunicação entre as camadas ocorre via **requisições HTTP (POST/GET)** entre os formulários do frontend e os endpoints do backend.  
 
-📁 Organização do Código
-app.py ou main.py: Ponto de entrada da aplicação, onde são configuradas as rotas e a autenticação.
+---
 
-models.py: Modelos de dados, incluindo o modelo de usuário.
+##  Mecanismos de Segurança Implementados  
+- **Autenticação de Usuário** com login e senha.  
+- **Hash de Senhas** com `bcrypt` para proteger credenciais.  
+- **Validação de Entrada** para evitar dados inválidos ou vazios.  
+- **Proteção de Rotas**: usuários não autenticados são redirecionados.  
+- **Gerenciamento de Sessão** com expiração.  
 
-templates/: Arquivos HTML com formulários de login e registro.
+---
 
-database/: Configuração e gerenciamento do banco de dados.
+##  Tecnologias Utilizadas  
+| **Camada**       | **Tecnologias**                              |
+|------------------|---------------------------------------------|
+| **Backend**      | Python, Flask, bcrypt, SQLite               |
+| **Frontend**     | HTML, CSS, Jinja2 Templates                 |
 
-🔒 Fluxo de Autenticação
-Cadastro: O usuário fornece e-mail e senha; a senha é criptografada e os dados são salvos no banco de dados.
+---
 
-Login: O usuário fornece credenciais; o sistema verifica a senha criptografada e, se correta, inicia uma sessão.
-
-Acesso Protegido: Rotas específicas exigem autenticação para acesso, como páginas de perfil ou dashboard.
-
-📦 Bibliotecas Utilizadas
-bcrypt: Para hash e verificação de senhas.
-
-sqlite3 ou SQLAlchemy: Para gerenciamento do banco de dados.
-
-Flask ou FastAPI: Frameworks web para gerenciamento de rotas e sessões.
-
-Jinja2: Para renderização de templates HTML de forma segura.
+##  Estrutura de Diretórios   
+```plaintext
+  sistema-streaming/
+├─── backend/               # Tudo do backend
+│    ├── app.py             # Ponto de entrada principal
+│    ├── models.py          # Definição dos modelos
+│    ├── database.db        # Banco de dados SQLite
+│    ├── requirements.txt   # Dependências
+│    └── __pycache__/       # Cache Python (gerado automaticamente)
+│
+├─── frontend/              # Interface do usuário
+│    └── templates/         # Páginas HTML
+│
+├── build/                  # Arquivos de build (gerados)
+│   └── main               # Executável temporário
+│
+├── dist/                   # Output final (gerado)
+│
+├── iniciar_app.bat         # Script de inicialização
+└── main.spec               # Configuração do PyInstaller
