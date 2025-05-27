@@ -24,6 +24,9 @@
       margin-top: 5px;
       box-sizing: border-box;
     }
+    input:invalid {
+      border-color: #ff4444;
+    }
     button {
       margin-top: 20px;
       padding: 10px;
@@ -51,6 +54,7 @@
       background-color: #c8e6c9;
       color: #2e7d32;
     }
+    
   </style>
 </head>
 <body>
@@ -69,18 +73,23 @@
     <div class="message success">Você já pode fazer login.</div>
   {% endif %}
 
-  <form method="POST" action="{{ url_for('register') }}">
+  <form method="POST" action="{{ url_for('register') }}" onsubmit="return validateForm()">
     <label for="nome">Nome:</label>
     <input type="text" id="nome" name="nome" required />
 
     <label for="email">E-mail:</label>
-    <input type="email" id="email" name="email" required />
+    <input type="email" id="email" name="email" required pattern="[^\s@]+@[^\s@]+\.[^\s@]+"
+      oninput="validateEmail(this)" />
 
-    <label for="senha">Senha:</label>
-    <input type="password" id="senha" name="senha" required />
+    <span id="emailHint" class="hint">Exemplo: usuario@dominio.com</span>
+    
+    <label for="senha">Senha (mínimo 6 caracteres):</label>
+    <input type="password" id="senha" name="senha" minlength="6" required />
 
     <label for="confirma_senha">Repita a senha:</label>
-    <input type="password" id="confirma_senha" name="confirma_senha" required />
+    <input type="password" id="confirma_senha" name="confirma_senha" required oninput="checkPasswordMatch()"/>
+
+    <span id="passwordMatchHint" class="hint"></span>
 
     <label for="perfil">Tipo de usuário:</label>
     <select id="perfil" name="perfil" required>
@@ -92,6 +101,53 @@
   </form>
 
   <p>Já tem uma conta? <a href="{{ url_for('login') }}">Faça login aqui</a>.</p>
+  <script>
+    
+    function validateEmail(input) {
+      const emailHint = document.getElementById('emailHint');
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      
+      if (!regex.test(input.value)) {
+        emailHint.textContent = "E-mail inválido! Use o formato usuario@dominio.com";
+        emailHint.className = "hint error-hint";
+      } else {
+        emailHint.textContent = "E-mail válido!";
+        emailHint.className = "hint";
+      }
+    }
+    
+    function checkPasswordMatch() {
+      const senha = document.getElementById('senha').value;
+      const confirmaSenha = document.getElementById('confirma_senha').value;
+      const hint = document.getElementById('passwordMatchHint');
 
+      if (confirmaSenha && senha !== confirmaSenha) {
+        hint.textContent = "As senhas não coincidem!";
+        hint.className = "hint error-hint";
+      } else if (confirmaSenha) {
+        hint.textContent = "Senhas coincidem!";
+        hint.className = "hint";
+      }
+    }
+
+    function validateForm() {
+      const email = document.getElementById('email').value;
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const senha = document.getElementById('senha').value;
+      const confirmaSenha = document.getElementById('confirma_senha').value;
+
+      if (!regex.test(email)) {
+        alert("Por favor, insira um e-mail válido!");
+        return false;
+      }
+
+      if (senha !== confirmaSenha) {
+        alert("As senhas não coincidem!");
+        return false;
+      }
+
+      return true;
+    }
+  </script>
 </body>
 </html>
