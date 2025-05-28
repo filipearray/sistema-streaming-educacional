@@ -53,6 +53,8 @@ A comunicação entre as camadas ocorre via **requisições HTTP (POST/GET)** en
 │
 ├── iniciar_app.bat         # Script de inicialização
 └── main.spec               # Configuração do PyInstaller
+
+   ```
 ##  Como Executar
 
 ### Modo de Desenvolvimento (via Python)
@@ -61,7 +63,6 @@ A comunicação entre as camadas ocorre via **requisições HTTP (POST/GET)** en
    ```bash
    python -m venv .venv
    .venv\Scripts\activate
-   ```
 
 2. Instale as dependências:
    ```bash
