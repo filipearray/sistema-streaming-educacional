@@ -58,6 +58,7 @@ A comunicação entre as camadas ocorre via **requisições HTTP (POST/GET)** en
 ##  Como Executar
 
 ### Modo de Desenvolvimento (via Python)
+Observação: Na pasta já existe um `iniciar_app.bat` para uso. Caso deseje rodar, não precisa realizar os passos abaixo. 
 
 1. Crie um ambiente virtual (opcional, mas recomendado):
    ```bash
@@ -120,7 +121,6 @@ A comunicação entre as camadas ocorre via **requisições HTTP (POST/GET)** en
 4. Execute `iniciar_app.bat` para iniciar a aplicação.
 
 
-Observação: na pasta já existe um `iniciar_app.bat` para uso. Caso deseje rodar, não precisa realizar os passos acima. 
 
 ---
 
