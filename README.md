@@ -53,3 +53,81 @@ A comunicação entre as camadas ocorre via **requisições HTTP (POST/GET)** en
 │
 ├── iniciar_app.bat         # Script de inicialização
 └── main.spec               # Configuração do PyInstaller
+##  Como Executar
+
+### Modo de Desenvolvimento (via Python)
+
+1. Crie um ambiente virtual (opcional, mas recomendado):
+   ```bash
+   python -m venv .venv
+   .venv\Scripts\activate
+   ```
+
+2. Instale as dependências:
+   ```bash
+   pip install flask flask-bcrypt
+   ```
+
+3. Crie o banco de dados (apenas uma vez):
+   ```python
+   import sqlite3
+   conn = sqlite3.connect('database.db')
+   cursor = conn.cursor()
+   cursor.execute("""
+   CREATE TABLE usuarios (
+       id INTEGER PRIMARY KEY AUTOINCREMENT,
+       nome TEXT NOT NULL,
+       email TEXT NOT NULL UNIQUE,
+       senha TEXT NOT NULL
+   );
+   """)
+   conn.commit()
+   conn.close()
+   ```
+
+4. Execute a aplicação:
+   ```bash
+   python main.py
+   ```
+
+5. Acesse no navegador:
+   ```
+   http://127.0.0.1:5000/register
+   ```
+
+---
+
+### Modo Executável (.exe)
+
+1. Compile com PyInstaller:
+   ```bash
+   pyinstaller --noconfirm --onefile --add-data "templates;templates" main.py
+   ```
+
+2. O executável estará disponível na pasta `dist/`:
+   ```
+   dist/main.exe
+   ```
+
+3. Para facilitar o uso, crie um `iniciar_app.bat`:
+   ```bat
+   @echo off
+   cd /d %~dp0dist
+   start main.exe
+   ```
+
+4. Execute `iniciar_app.bat` para iniciar a aplicação.
+
+---
+
+##  Observações
+
+- O projeto roda localmente em `127.0.0.1:5000` ou `127.0.0.1:8000`, conforme configurado no `main.py`.
+- Ideal para testes e aprendizado. **Não recomendado para produção sem ajustes de segurança.**
+- O campo “perfil” foi removido na versão final conforme solicitado.
+
+---
+
+## Licença
+
+Este projeto é de uso livre para fins acadêmicos e educacionais.
